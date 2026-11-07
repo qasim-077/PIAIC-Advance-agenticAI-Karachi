@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 1 · PIAIC Agentic AI Karachi</title>
+<meta name="description" content="Lab 1: a real job, checked. A 90-minute, step-by-step classroom version of Chapter 1's lab from The AI Agent Factory.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+/* ---------- lab-only styles ---------- */
+.lab-hero{padding:44px 0 26px}
+.lab-hero .row{margin-top:18px}
+.lab-progress{margin-top:22px;display:grid;gap:8px;max-width:560px}
+.lab-progress .row{margin-top:0;justify-content:space-between;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.lab-progress .progress{height:10px}
+
+.step{scroll-margin-top:84px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.step+.step{margin-top:22px}
+.step.done{border-color:color-mix(in srgb,var(--accent) 55%,var(--line))}
+.step.now{box-shadow:0 0 0 2px var(--accent),var(--shadow)}
+.step-head{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--line);background:var(--sunk)}
+.step-num{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:16px;background:var(--surface);border:1.5px solid var(--line)}
+.step.done .step-num{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.step-head h2{font-size:clamp(21px,2.6vw,27px)}
+.step-meta{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:6px;font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.step-meta .now-tag{display:none;color:var(--accent);font-weight:700}
+.step.now .now-tag{display:inline}
+.step-body{padding:20px;display:grid;gap:18px;min-width:0}
+.step-body>*{min-width:0}
+.step-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--line);background:var(--sunk)}
+.step-foot .row{gap:8px}
+
+.ask{border-left:4px solid var(--blue);background:var(--blue-soft);border-radius:0 10px 10px 0;padding:12px 16px}
+.ask .eyebrow{color:var(--blue);font-weight:700}
+.ask q{display:block;margin-top:4px;font-size:16.5px;font-weight:500;quotes:"“" "”"}
+
+h3.sub{font-size:16px;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.checklist{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.checklist label{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--surface)}
+.checklist label:hover{border-color:var(--accent)}
+.checklist input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;border:2px solid var(--line);border-radius:6px;margin:1px 0 0;cursor:pointer;display:grid;place-items:center;background:var(--surface)}
+.checklist input:checked{background:var(--accent);border-color:var(--accent)}
+.checklist input:checked::after{content:"✓";color:var(--accent-ink);font-size:14px;font-weight:800;line-height:1}
+.checklist input:checked+span{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 60%,transparent)}
+.checklist span{min-width:0;overflow-wrap:anywhere}
+
+.builder{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg);display:grid;gap:14px}
+.builder-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.field label{display:block;font-weight:700;font-family:var(--f-display);font-size:15.5px}
+.field .hint{display:block;font-size:13.5px;color:var(--muted);margin:2px 0 6px;line-height:1.45}
+.field textarea{width:100%;min-height:86px;resize:vertical;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:14.5px/1.5 var(--f-body);color:var(--ink);background:var(--surface)}
+.field textarea:focus{outline:none;border-color:var(--accent)}
+.builder .meter{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.builder .meter b{color:var(--accent)}
+
+.facts{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.fact{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface)}
+.fact b{display:block;font-family:var(--f-display);font-size:18px}
+.fact span{font-size:14px;color:var(--muted)}
+
+.loop{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));counter-reset:loop}
+.loop div{position:relative;border:1px solid var(--line);border-radius:12px;padding:14px 14px 14px 52px;background:var(--surface);font-size:15px}
+.loop div::before{counter-increment:loop;content:counter(loop);position:absolute;left:14px;top:13px;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:13px;font-family:var(--f-mono)}
+.loop div b{display:block;font-family:var(--f-display)}
+
+.meta-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.keybox{border:1.5px dashed var(--accent);border-radius:12px;padding:14px;background:var(--accent-soft)}
+.keybox .eyebrow{color:var(--accent);font-weight:700}
+.concept{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--surface)}
+.concept .eyebrow{color:var(--violet);font-weight:700}
+.give{font-size:15px}
+.give b{font-family:var(--f-display)}
+
+.mini-timer{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:13px}
+.mini-timer output{min-width:48px;font-weight:700;font-variant-numeric:tabular-nums}
+.mini-timer.running output{color:var(--accent)}
+.mini-timer.over output{color:var(--red);animation:pulse 1s infinite}
+
+.toc .tick{font-size:12px;color:var(--accent);font-weight:800}
+.toc a.now-step{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.toc-tools{margin-top:16px;display:grid;gap:8px}
+
+.code{font-size:13px}
+.code-wrap{position:relative}
+.trouble dt{font-weight:700;font-family:var(--f-display);margin-top:12px}
+.trouble dd{margin:2px 0 0;color:var(--muted)}
+.hw{display:grid;gap:10px}
+.hw .card{padding:16px}
+@media (max-width:560px){
+  .step-head{padding:14px}
+  .step-body{padding:14px}
+  .step-foot{padding:12px 14px}
+  .step-num{width:40px;height:40px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<header id="nav" data-page="lab"></header>
+
+<main class="wrap">
+  <section class="lab-hero">
+    <span class="badge">Hour 2 · 1:30 – 3:00 · 90 minutes</span>
+    <h1 style="margin-top:14px">Lab 1: a real job, checked</h1>
+    <p class="lede" style="font-size:clamp(17px,2vw,19px);color:var(--muted);max-width:720px;margin-top:14px">
+      You work in accounts payable at Brightline Wholesale Supply. Your manager hands you 15 vendor invoices and a list of asks.
+      You brief an AI to do each job, then <b>check its work against an answer key</b> before you hand anything over.
+      Humans define intent. AI Workers execute. Humans verify outcomes.
+    </p>
+    <div class="row">
+      <a class="btn primary" href="#setup">Start at step 1 →</a>
+      <a class="btn" href="https://github.com/panaversity/agentfactory-v2-resources/releases/latest/download/brightline-lab-ch01.zip">⬇ Lab kit (zip)</a>
+      <button class="btn" id="teachToggle" type="button" aria-pressed="true">🎤 Instructor notes</button>
+    </div>
+    <div class="lab-progress" aria-live="polite">
+      <div class="row"><span id="progLabel">0 of 10 steps done</span><span id="progChecks">0 ticks</span></div>
+      <div class="progress"><i id="progBar"></i></div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <aside class="toc" aria-label="Lab steps">
+      <div class="eyebrow">Lab steps</div>
+      <ol id="toc"></ol>
+      <div class="toc-tools">
+        <a class="btn small" href="#troubleshoot">🛠 If something goes wrong</a>
+        <button class="btn small" id="resetLab" type="button">↺ Reset my lab progress</button>
+      </div>
+    </aside>
+
+    <div>
+      <div id="steps"></div>
+
+      <section id="troubleshoot" class="block" style="margin-top:36px">
+        <div class="section-head"><h2>If something goes wrong</h2><span class="meta">Keep this open during the lab</span></div>
+        <dl class="trouble card flat" style="margin:0">
+          <dt>The AI will not take <code>inputs.zip</code>.</dt>
+          <dd>Unzip it, and upload the files inside it instead. If this happens in Task 7, count it as a change.</dd>
+          <dt>The AI will not take an answer key, or your plan's uploads ran out.</dt>
+          <dd>Open the key, copy its text, and paste it under the check prompt instead.</dd>
+          <dt>You attached the wrong task's key.</dt>
+          <dd>Say so, attach the right one, and send the check prompt again.</dd>
+          <dt>Your plan cannot work on files.</dt>
+          <dd>Do the tasks anyway, and see what the AI could and could not do.</dd>
+          <dt>Your desktop app cannot open the folder (Task 8).</dt>
+          <dd>Save the file in the <code>Brightline AP</code> folder yourself, and say so when you check Task 8.</dd>
+          <dt>Your plan's daily limit ran out.</dt>
+          <dd>Your conversation will still be there tomorrow. Carry on from the next task.</dd>
+          <dt>There is no Extensions menu in Google Sheets (Task 14).</dt>
+          <dd>The file is still an Excel file. Click File, then Save as Google Sheets, and work in the new copy.</dd>
+          <dt>Your Google account cannot install add-ons (Task 14).</dt>
+          <dd>A work account may block them. Use a personal Google account, or read Task 14's answer key.</dd>
+        </dl>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap stack">
+    <p>Adapted for a PIAIC Advance Agentic AI (Karachi) classroom session from
+      <a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/lab/">Lab 1: a real job, checked</a>,
+      Chapter 1 of Panaversity's <i>The AI Agent Factory</i>, Second Edition. Lab kit and answer keys:
+      <a href="https://github.com/panaversity/agentfactory-v2-resources">panaversity/agentfactory-v2-resources</a>.
+      Every name, number and company in the lab is invented.</p>
+    <p>Your ticks and brief drafts are saved only in this browser.</p>
+  </div>
+</footer>
+
+<script src="assets/js/common.js"></script>
+<script src="assets/js/lab.js"></script>
+</body>
+</html>

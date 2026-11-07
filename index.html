@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1 Session · PIAIC Agentic AI Karachi</title>
+<meta name="description" content="3-hour interactive class for Chapter 1 of The AI Agent Factory: From Chatbots to AI Workers — 90 minutes of theory, 90 minutes of Lab 1.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .halves{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+  .half{position:relative;overflow:hidden}
+  .half .big{font-family:var(--f-display);font-size:44px;font-weight:700;color:var(--accent);line-height:1}
+  .half.lab .big{color:var(--gold)}
+  .half ul{margin-top:12px}
+  .topic{display:flex;gap:14px;align-items:flex-start}
+  .topic .n{flex:none;width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--f-mono);font-weight:700;font-size:14px}
+  .bar{display:flex;height:14px;border-radius:99px;overflow:hidden;margin-top:18px;border:1px solid var(--line)}
+  .bar i{display:block;height:100%}
+  .bar .th{background:var(--accent);flex:90}
+  .bar .lb{background:var(--gold);flex:90}
+  .bar-labels{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:6px}
+  .marker{position:relative;height:0}
+  .marker b{position:absolute;top:-24px;width:2px;height:20px;background:var(--ink);transition:left 1s linear}
+  .checklist{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .checklist label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+  .checklist input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent);flex:none}
+</style>
+</head>
+<body>
+<header id="nav" data-page="home"></header>
+
+<main>
+  <div class="wrap hero">
+    <span class="badge">PIAIC · Advance Agentic AI · Karachi</span>
+    <h1 style="margin-top:18px">Chapter 1<br>From Chatbots to AI Workers</h1>
+    <p class="lede">A 3-hour hands-on class built on Chapter 1 of Panaversity's <em>The AI Agent Factory</em>. In the first 90 minutes we learn to place any AI product on a four-rung ladder and to keep three ideas apart. In the next 90 minutes we give an AI a real accounts-payable job, and check every result against an answer key.</p>
+    <div class="rule-banner" aria-label="The book's operating rule">
+      <span>Humans <b>define intent</b>.</span>
+      <span>AI Workers <b>execute</b>.</span>
+      <span>Humans <b>verify outcomes</b>.</span>
+    </div>
+    <div class="row" style="margin-top:28px">
+      <a class="btn primary" href="theory.html">Start Part 1 · Theory →</a>
+      <a class="btn" href="lab.html">Jump to Part 2 · Lab 1</a>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="eyebrow">The 3-hour plan</p><h2>Two halves, one idea</h2></div>
+        <p class="meta">Press ▶ on the clock (top right) when class starts</p>
+      </div>
+      <div class="halves">
+        <a class="card half link-card" href="theory.html">
+          <p class="eyebrow">Part 1 · 0:00 – 1:30</p>
+          <p class="big" style="margin-top:8px">90 min</p>
+          <h3 style="margin-top:8px">Theory, with live diagrams</h3>
+          <ul class="muted">
+            <li>Maria's story: the $4,850 duplicate</li>
+            <li>The ladder of interaction (sort-the-jobs game)</li>
+            <li>The same text box: watch a request route</li>
+            <li>Continuity, execution and persistence (three toggles)</li>
+            <li>Machine or record? The sandbox animation</li>
+            <li>Four questions for any AI announcement</li>
+          </ul>
+        </a>
+        <a class="card half lab link-card" href="lab.html">
+          <p class="eyebrow">Part 2 · 1:30 – 3:00</p>
+          <p class="big" style="margin-top:8px">90 min</p>
+          <h3 style="margin-top:8px">Lab 1: a real job, checked</h3>
+          <ul class="muted">
+            <li>Brightline Wholesale Supply, accounts payable</li>
+            <li>Write briefs in four headings</li>
+            <li>Tasks 1–6 and 9, each checked against its key</li>
+            <li>Where does each result live, and does it stay?</li>
+            <li>Homework: Tasks 7, 8, 10, and Part B</li>
+          </ul>
+        </a>
+      </div>
+      <div class="bar" aria-hidden="true"><i class="th"></i><i class="lb"></i></div>
+      <div class="marker" aria-hidden="true"><b id="nowMarker" style="left:0"></b></div>
+      <div class="bar-labels"><span>0:00</span><span>1:30 · break &amp; switch</span><span>3:00</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="eyebrow">Run of show</p><h2>Minute by minute</h2></div>
+        <p class="meta" id="nowText">Clock not started</p>
+      </div>
+      <ol class="agenda" id="agenda"></ol>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">By the end of class</p><h2>What students can do</h2></div></div>
+      <div class="grid g2">
+        <div class="card flat"><h3>Place any AI product on the ladder</h3><p class="muted" style="margin-top:8px">Search engines are queried. Chatbots are prompted. Agents are delegated tasks. AI Workers are managed.</p></div>
+        <div class="card flat"><h3>Keep three questions apart</h3><p class="muted" style="margin-top:8px">Does it remember and continue (continuity)? Which computer does the work run on (execution)? Where is the finished output kept (persistence)?</p></div>
+        <div class="card flat"><h3>Get 2026 value from the text box</h3><p class="muted" style="margin-top:8px">Write a brief with an outcome, context, format and constraints, so the box does the work instead of talking about it.</p></div>
+        <div class="card flat"><h3>Tell new from renamed</h3><p class="muted" style="margin-top:8px">Ask four questions of any announcement: which rung, where it runs and is kept, who it acts as, and its status.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Topics in this repo</p><h2>Chapter 1, lesson by lesson</h2></div><a class="btn small" href="https://github.com/qasim-077/PIAIC-Advance-agenticAI-Karachi/blob/main/notes/chapter-1-key-concepts.md">Read as notes →</a></div>
+      <div class="grid g2">
+        <a class="card flat link-card topic" href="theory.html#maria"><span class="n">0</span><div><h3>Why it matters: Maria's week</h3><p class="muted">Two expensive mistakes, neither about intelligence.</p></div></a>
+        <a class="card flat link-card topic" href="theory.html#ladder"><span class="n">1.1</span><div><h3>The ladder of interaction</h3><p class="muted">Query → message → task → role. Agent vs AI Worker.</p></div></a>
+        <a class="card flat link-card topic" href="theory.html#textbox"><span class="n">1.2</span><div><h3>The same text box, a different destination</h3><p class="muted">One conversation routes between answering and working.</p></div></a>
+        <a class="card flat link-card topic" href="theory.html#runs"><span class="n">1.3</span><div><h3>Where the work runs</h3><p class="muted">The execution environment: files, tools, shell, limits.</p></div></a>
+        <a class="card flat link-card topic" href="theory.html#cep"><span class="n">1.4</span><div><h3>Continuity, execution and persistence</h3><p class="muted">Three ideas that vary independently. Remembering is not keeping.</p></div></a>
+        <a class="card flat link-card topic" href="theory.html#tools"><span class="n">1.5</span><div><h3>How today's tools realize it</h3><p class="muted">Anthropic, OpenAI, open source. What survives: the machine or the record?</p></div></a>
+        <a class="card flat link-card topic" href="theory.html#paradigm"><span class="n">1.6</span><div><h3>The paradigm and the products</h3><p class="muted">The shift is lasting. The products are less stable.</p></div></a>
+        <a class="card flat link-card topic" href="lab.html"><span class="n">Lab</span><div><h3>Lab 1: a real job, checked</h3><p class="muted">Brightline AP: delegate, verify, and find where results live.</p></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="grid g2">
+        <div class="card">
+          <p class="eyebrow">Students · before class</p>
+          <h3 style="margin-top:6px">Bring these</h3>
+          <ul class="checklist" id="prep" style="margin-top:14px">
+            <li><label><input type="checkbox" data-k="laptop"> A laptop, charged, with a modern browser</label></li>
+            <li><label><input type="checkbox" data-k="acct"> A Claude or ChatGPT account you can sign in to (free plans work for Part A)</label></li>
+            <li><label><input type="checkbox" data-k="kit"> The lab kit, downloaded and unzipped: <a href="https://github.com/panaversity/agentfactory-v2-resources/releases/latest/download/brightline-lab-ch01.zip">brightline-lab-ch01.zip</a></label></li>
+            <li><label><input type="checkbox" data-k="sheet"> Something that opens spreadsheets: Excel, Numbers or Google Sheets</label></li>
+            <li><label><input type="checkbox" data-k="read"> Optional: read the <a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/overview/">chapter overview</a> (5 min)</label></li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="eyebrow">Source material</p>
+          <h3 style="margin-top:6px">Read the book</h3>
+          <ul>
+            <li><a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/overview/">Chapter 1 overview</a></li>
+            <li><a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/ladder-of-interaction/">1.1</a> · <a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/same-text-box/">1.2</a> · <a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/where-the-work-runs/">1.3</a> · <a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/continuity-execution-persistence/">1.4</a> · <a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/both-ai-vendors/">1.5</a> · <a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/paradigm-and-products/">1.6</a></li>
+            <li><a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/lab/">Lab 1: a real job, checked</a></li>
+            <li><a href="https://agentfactory2.panaversity.org/ai-worker-paradigm/from-chatbots-to-ai-workers/check-yourself/">Check yourself: flashcards &amp; quiz</a></li>
+          </ul>
+          <p class="muted" style="margin-top:12px;font-size:14px">Product details (plans, betas, prices) are as the book states them in early November 2026. They change: check each vendor's page on the day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">PIAIC Advance Agentic AI · Karachi. Teaching material built on <a href="https://agentfactory2.panaversity.org/">The AI Agent Factory</a>, Second Edition, by Panaversity. Lab files and answer keys belong to Panaversity and are linked, not copied. Brightline and every name in the lab are invented.</div>
+</footer>
+
+<script src="assets/js/common.js"></script>
+<script>
+(function(){
+  const AGENDA = [
+    [0,10,'Opening: Maria\'s week','The $4,850 duplicate and the lost spreadsheet','theory.html#maria'],
+    [10,25,'1.1 The ladder of interaction','Animated ladder + sort-the-jobs game','theory.html#ladder'],
+    [25,38,'1.2 The same text box','Add brief parts, watch the request route','theory.html#textbox'],
+    [38,48,'1.3 Where the work runs','The build-check-fix loop inside the environment','theory.html#runs'],
+    [48,65,'1.4 Continuity, execution, persistence','Three toggles · three places · what is durable?','theory.html#cep'],
+    [65,75,'1.5 How today\'s tools realize it','Vendor tabs · machine or record animation','theory.html#tools'],
+    [75,83,'1.6 The paradigm and the products','Four-question announcement analyser','theory.html#paradigm'],
+    [83,90,'Check yourself + break','10-question chapter quiz','theory.html#quiz'],
+    [90,95,'Lab setup','Kit, account, one new conversation','lab.html#setup'],
+    [95,105,'The brief and the check loop','Four headings · the check prompt','lab.html#brief'],
+    [105,120,'Task 1 · What we owe','First brief, first answer key','lab.html#task-1'],
+    [120,140,'Task 2 · A spreadsheet for Friday','Hidden files · days-until-due column','lab.html#task-2'],
+    [140,148,'Task 3 · What is due by Friday','','lab.html#task-3'],
+    [148,156,'Task 4 · Match the POs','','lab.html#task-4'],
+    [156,164,'Task 5 · A doc for the controller','','lab.html#task-5'],
+    [164,172,'Task 6 · Which surface for which job','Rung · surface · trigger','lab.html#task-6'],
+    [172,178,'Task 9 · Where each result lives','Place · stays or goes','lab.html#task-9'],
+    [178,180,'Wrap-up & homework','Tasks 7, 8, 10 · Part B','lab.html#wrap']
+  ];
+  const t = m => `${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}`;
+  const ol = document.getElementById('agenda');
+  ol.innerHTML = AGENDA.map(([a,b,title,sub,href],i)=>
+    `<li data-i="${i}"><span class="t">${t(a)} – ${t(b)}</span><a href="${href}">${title}${sub?`<span class="sub">${sub}</span>`:''}</a><span class="d">${b-a} min</span></li>`).join('');
+  const marker = document.getElementById('nowMarker'), nowText = document.getElementById('nowText');
+  document.addEventListener('piaic:clock', e => {
+    const min = e.detail.elapsed/60;
+    marker.style.left = Math.min(100, min/180*100) + '%';
+    let cur = -1;
+    AGENDA.forEach(([a,b],i)=>{ if(min>=a && min<b) cur=i; });
+    ol.querySelectorAll('li').forEach(li=>li.classList.toggle('now', +li.dataset.i===cur));
+    if (e.detail.elapsed < 1 && !e.detail.running) nowText.textContent = 'Clock not started';
+    else if (cur>=0) nowText.textContent = 'Now: ' + AGENDA[cur][2] + ` · ${Math.ceil(AGENDA[cur][1]-min)} min left`;
+    else nowText.textContent = 'Session time is up';
+  });
+  // prep checklist persistence
+  const prep = piaicStore.get('piaic-prep', {});
+  document.querySelectorAll('#prep input').forEach(cb=>{
+    cb.checked = !!prep[cb.dataset.k];
+    cb.addEventListener('change',()=>{ prep[cb.dataset.k]=cb.checked; piaicStore.set('piaic-prep',prep); });
+  });
+})();
+</script>
+</body>
+</html>
