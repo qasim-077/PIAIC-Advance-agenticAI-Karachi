@@ -82,6 +82,65 @@ Constraints: Ask only. Do not answer for me, and do not tell me
   const FILES_Q = 'Which files did you create that you did not deliver to me?';
   const COLUMN_ASK = 'Add a column that shows how many days each bill has until it is due, as of Wednesday, September 30, 2026. Late bills get a negative number.';
 
+  /* ---------- sample student inputs: one model brief per task the students write.
+     They state only facts from "The job" and good AP practice; the answers come from the AI and the keys. ---------- */
+  const SAMPLES = {
+    'task-1': {
+      outcome: 'The total Brightline still owes on the attached vendor invoices,\nas of Wednesday, September 30, 2026: one number.',
+      context: 'inputs.zip, attached, holds 15 invoice PDFs and a PO list (ignore\nthe PO list for now). I work in accounts payable at Brightline\nWholesale Supply, and this is for my manager. Midwest Packaging\'s\ninvoice 4471 was paid on September 25, 2026. No other invoice is\npaid yet.',
+      format: 'The total first, on one line. Then a table of the invoices you\ncounted: vendor, invoice number, invoice date, amount. Then a list\nof any invoice you left out, with the reason.',
+      constraints: 'Read every PDF, and take each amount from it; do not guess. Leave\nout invoice 4471. If an invoice looks like a copy of another, or\nits total does not match its lines, do not count it: list it and\nask me. Do not change any file.'
+    },
+    'task-2': {
+      outcome: 'One spreadsheet file of all 15 invoices that my manager can check\nbefore Friday, October 2, 2026, and open again on Monday. Done when\nevery invoice is a row and every amount matches its PDF.',
+      context: 'The 15 invoice PDFs you already have from inputs.zip. Today is\nWednesday, September 30, 2026. Invoice 4471 was paid on September\n25, 2026. No other invoice is paid yet.',
+      format: 'An .xlsx file I can download. One row per invoice, with columns:\nvendor, invoice number, invoice date, payment terms, due date, PO\nnumber, amount, status (Paid, Unpaid or Check), note. A total of\nthe unpaid amounts at the bottom. Then, in the chat, up to three\nlines on anything I should look at.',
+      constraints: 'Take every value from the PDFs; do not guess. Keep 4471 in the\nsheet, marked Paid. Mark any copy of another invoice, or any\ninvoice whose total does not match its lines, as Check, with a\nshort note. Use plain values, so the file opens anywhere. Do not\nchange the source files.'
+    },
+    'task-3': {
+      outcome: 'The invoices that are late, or due on or before Friday, October 2,\n2026, and what they come to in total.',
+      context: 'The 15 invoices, and the spreadsheet you made in this\nconversation. Today is Wednesday, September 30, 2026. Invoice 4471\nwas paid on September 25, 2026. No other invoice is paid yet.',
+      format: 'A table: vendor, invoice number, due date, days until due\n(negative if late), amount. Late bills first. Then one line with\nthe total.',
+      constraints: 'Leave out any bill already paid, and any copy of a bill already\non the list. If a due date or payment term is unclear, list that\ninvoice under the table and ask me. Do not change any file.'
+    },
+    'task-4': {
+      outcome: 'For every invoice, whether it matches the purchase order it was\nbilled against. For each one that does not, the reason.',
+      context: 'The 15 invoices, and Purchasing\'s PO list, purchase-orders.csv,\nboth in inputs.zip. Each PO line has a PO number, vendor, item,\nquantity, unit price and line total.',
+      format: 'First one line: how many match, and how many do not. Then a table\nof the ones that do not: invoice number, vendor, PO number, the\nline that differs, what the PO says, what the invoice says.',
+      constraints: 'Compare vendor, items, quantities, unit prices and totals, line\nby line. If an invoice has no PO number, or its PO is not in the\nlist, say so; do not guess one. Report only. Do not change any\nfile.'
+    },
+    'task-5': {
+      outcome: 'A one-page document for Brightline\'s controller, that I can open\nagain later: each bill due by Friday, October 2, 2026, and their\ntotal.',
+      context: 'The Friday list you made in this conversation. The controller is\nthe person who runs Brightline\'s accounts. Invoice 4471 is\nalready paid.',
+      format: 'A document, not text in the chat. A title, and the date\nWednesday, September 30, 2026. A table: vendor, invoice number,\namount. The total under the table. One page.',
+      constraints: 'Use only the bills on the Friday list. Do not share or send the\ndoc to anyone; I will send it myself. Tell me where the doc is\nsaved, so I can open it again.'
+    }
+  };
+
+  /* Tasks 6 and 9: the student's input is their reply. A fill-in template, not the answers. */
+  const REPLY_6 = `1. Rung: ____  Surface: ____  Starts it: me / a schedule
+2. Rung: ____  Surface: ____  Starts it: me / a schedule
+3. Rung: ____  Surface: ____  Starts it: me / a schedule
+4. Rung: ____  Surface: ____  Starts it: me / a schedule
+5. Rung: ____  Surface: ____  Starts it: me / a schedule
+6. Rung: ____  Surface: ____  Starts it: me / a schedule`;
+  const REPLY_9 = `1. Place: ____  Stays or goes: ____
+2. Place: ____  Stays or goes: ____
+3. Place: ____  Stays or goes: ____
+4. (skip: Task 8 is homework)
+5. Place: ____  Stays or goes: ____`;
+
+  /* Everything the student types in each task, in order. */
+  const SENDS = {
+    'task-1': ['Your brief, with <code>inputs.zip</code> attached', 'The check prompt, with Task 1\'s key attached'],
+    'task-2': ['Your brief (attach nothing)', `<q>${FILES_Q}</q>`, `<q>${COLUMN_ASK}</q>`, 'The check prompt, with Task 2\'s key attached'],
+    'task-3': ['Your brief', 'The check prompt, with Task 3\'s key attached'],
+    'task-4': ['Your brief', 'The check prompt, with Task 4\'s key attached'],
+    'task-5': ['Your brief', 'The check prompt, with Task 5\'s key attached'],
+    'task-6': ['The printed brief, as it is', 'Your reply: all six jobs in one message (template below)', 'The check prompt, with Task 6\'s key attached'],
+    'task-9': ['The printed brief, as it is, in your first conversation', 'Your reply: every result in one message (template below)', 'The check prompt, with Task 9\'s key attached']
+  };
+
   /* ---------- the ten steps (minutes are offsets on the 3-hour session clock) ---------- */
   const STEPS = [
     {
@@ -325,6 +384,22 @@ Constraints: Ask only. Do not answer for me, and do not tell me
         </div>
         <div><div class="eyebrow" style="margin-bottom:6px">Your assembled brief</div>${codeBlock('', ' data-preview')}</div>
       </div>` : '';
+    const sample = SAMPLES[s.id] ? `
+      <details class="sample">
+        <summary><span>📝 Sample brief</span><span class="muted">Write yours first, then compare</span></summary>
+        <div class="sample-body">
+          <p class="muted" style="font-size:14.5px">One good brief for this task. It gives the AI the facts and limits, not the answer. Yours can differ and still pass.</p>
+          ${codeBlock(assemble(SAMPLES[s.id]))}
+          <div class="row"><button class="btn small" type="button" data-fill="${s.id}">Put the sample in my brief builder</button></div>
+        </div>
+      </details>` : '';
+    const replyTpl = s.id === 'task-6' || s.id === 'task-9' ? `
+      <div><h3 class="sub">Your reply: fill in, then send</h3>
+        <p class="muted" style="font-size:14.5px;margin-bottom:8px">When the AI shows the ${s.id === 'task-6' ? 'six jobs' : 'results'}, answer them all in one message in this shape. The decisions are yours; the answer key grades them.</p>
+        ${codeBlock(s.id === 'task-6' ? REPLY_6 : REPLY_9)}</div>` : '';
+    const sends = SENDS[s.id] ? `
+      <div class="sends"><div class="eyebrow">What you type, in order</div>
+        <ol>${SENDS[s.id].map(x => `<li>${x}</li>`).join('')}</ol></div>` : '';
     const keyBox = s.key ? `
       <div class="keybox"><div class="eyebrow">Check it now</div>
         <p style="margin-top:6px"><a class="btn small primary" href="${KEYURL(s.key)}">⬇ Task ${s.key} answer key</a></p>
@@ -345,8 +420,11 @@ Constraints: Ask only. Do not answer for me, and do not tell me
         ${s.ask ? `<div class="ask"><div class="eyebrow">Your manager asks</div><q>${s.ask}</q></div>` : ''}
         ${s.intro || ''}
         <div><h3 class="sub">What you do</h3><ul class="checklist">${todo}</ul></div>
+        ${sends}
         ${s.extra ? s.extra() : ''}
+        ${replyTpl}
         ${builder}
+        ${sample}
         ${s.give ? `<p class="give"><b>Give your manager:</b> ${s.give}</p>` : ''}
         <div class="meta-grid">${keyBox}<div class="concept"><div class="eyebrow">Connects to the theory</div><p style="margin-top:6px;font-size:15px">${s.concept}</p></div></div>
         <div class="callout teach">${s.teach}</div>
@@ -434,6 +512,19 @@ Constraints: Ask only. Do not answer for me, and do not tell me
         const nxt = STEPS[i + 1];
         if (nxt) setTimeout(() => document.getElementById(nxt.id).scrollIntoView({ behavior: 'smooth' }), 250);
       }
+      return;
+    }
+    const fill = e.target.closest('[data-fill]');
+    if (fill) {
+      const id = fill.dataset.fill, box = stepsEl.querySelector(`[data-builder="${id}"]`);
+      const has = Object.values(state.briefs[id] || {}).some(v => (v || '').trim());
+      if (has && !confirm('Replace what you wrote in this brief builder with the sample?')) return;
+      ['outcome', 'context', 'format', 'constraints'].forEach(f => {
+        const ta = box.querySelector(`[data-field="${f}"]`);
+        ta.value = SAMPLES[id][f].replace(/\n/g, ' ');
+        ta.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
     const t = e.target.closest('[data-timer-btn]');

@@ -90,6 +90,30 @@ Constraints: Grade only. Do not redo the task, and do not suggest a
 
 > 🎤 **Instructor:** most common miss — the date and "4471 is paid" are missing from Context. When totals differ, have two students read their briefs aloud.
 
+<details>
+<summary>📝 Sample brief (write yours first, then compare)</summary>
+
+One good brief for this task. It gives the AI the facts and limits, not the answer. Yours can differ and still pass.
+
+```text
+Outcome:     The total Brightline still owes on the attached vendor invoices,
+             as of Wednesday, September 30, 2026: one number.
+Context:     inputs.zip, attached, holds 15 invoice PDFs and a PO list (ignore
+             the PO list for now). I work in accounts payable at Brightline
+             Wholesale Supply, and this is for my manager. Midwest Packaging's
+             invoice 4471 was paid on September 25, 2026. No other invoice is
+             paid yet.
+Format:      The total first, on one line. Then a table of the invoices you
+             counted: vendor, invoice number, invoice date, amount. Then a list
+             of any invoice you left out, with the reason.
+Constraints: Read every PDF, and take each amount from it; do not guess. Leave
+             out invoice 4471. If an invoice looks like a copy of another, or
+             its total does not match its lines, do not count it: list it and
+             ask me. Do not change any file.
+```
+
+</details>
+
 ## Task 2. A spreadsheet for Friday (20 min)
 
 **Your manager asks:** "Put these invoices in a spreadsheet I can check before Friday. I'll want to open it again on Monday."
@@ -104,6 +128,32 @@ Constraints: Grade only. Do not redo the task, and do not suggest a
 **Give your manager:** a spreadsheet file with the new column, that you have opened. **Checkpoint:** checks 4–8 passed, and you know where the spreadsheet is.
 **Theory:** 1.3 — a revision builds on files already in the workspace. 1.4 — files never delivered go when the sandbox goes.
 
+<details>
+<summary>📝 Sample brief (write yours first, then compare)</summary>
+
+One good brief for this task. It gives the AI the facts and limits, not the answer. Yours can differ and still pass.
+
+```text
+Outcome:     One spreadsheet file of all 15 invoices that my manager can check
+             before Friday, October 2, 2026, and open again on Monday. Done when
+             every invoice is a row and every amount matches its PDF.
+Context:     The 15 invoice PDFs you already have from inputs.zip. Today is
+             Wednesday, September 30, 2026. Invoice 4471 was paid on September
+             25, 2026. No other invoice is paid yet.
+Format:      An .xlsx file I can download. One row per invoice, with columns:
+             vendor, invoice number, invoice date, payment terms, due date, PO
+             number, amount, status (Paid, Unpaid or Check), note. A total of
+             the unpaid amounts at the bottom. Then, in the chat, up to three
+             lines on anything I should look at.
+Constraints: Take every value from the PDFs; do not guess. Keep 4471 in the
+             sheet, marked Paid. Mark any copy of another invoice, or any
+             invoice whose total does not match its lines, as Check, with a
+             short note. Use plain values, so the file opens anywhere. Do not
+             change the source files.
+```
+
+</details>
+
 ## Task 3. What is due by Friday (8 min)
 
 **Your manager asks:** "Which of these invoices are late, or due by Friday, October 2? And what do they come to in total?"
@@ -111,12 +161,55 @@ Constraints: Grade only. Do not redo the task, and do not suggest a
 Send your brief, then check with the [Task 3 answer key](https://github.com/panaversity/agentfactory-v2-resources/releases/latest/download/brightline-lab-ch01-key-task-3.md).
 **Give your manager:** a list of bills, with their total. **Checkpoint:** check 9 passed.
 
+<details>
+<summary>📝 Sample brief (write yours first, then compare)</summary>
+
+One good brief for this task. It gives the AI the facts and limits, not the answer. Yours can differ and still pass.
+
+```text
+Outcome:     The invoices that are late, or due on or before Friday, October 2,
+             2026, and what they come to in total.
+Context:     The 15 invoices, and the spreadsheet you made in this
+             conversation. Today is Wednesday, September 30, 2026. Invoice 4471
+             was paid on September 25, 2026. No other invoice is paid yet.
+Format:      A table: vendor, invoice number, due date, days until due
+             (negative if late), amount. Late bills first. Then one line with
+             the total.
+Constraints: Leave out any bill already paid, and any copy of a bill already
+             on the list. If a due date or payment term is unclear, list that
+             invoice under the table and ask me. Do not change any file.
+```
+
+</details>
+
 ## Task 4. Match the POs (8 min)
 
 **Your manager asks:** "Purchasing's PO list is in that zip too. Do the invoices match what we ordered? For any that don't, tell me why."
 
 Send your brief, then check with the [Task 4 answer key](https://github.com/panaversity/agentfactory-v2-resources/releases/latest/download/brightline-lab-ch01-key-task-4.md).
 **Give your manager:** each invoice that does not match, with the reason. **Checkpoint:** checks 10 and 11 passed.
+
+<details>
+<summary>📝 Sample brief (write yours first, then compare)</summary>
+
+One good brief for this task. It gives the AI the facts and limits, not the answer. Yours can differ and still pass.
+
+```text
+Outcome:     For every invoice, whether it matches the purchase order it was
+             billed against. For each one that does not, the reason.
+Context:     The 15 invoices, and Purchasing's PO list, purchase-orders.csv,
+             both in inputs.zip. Each PO line has a PO number, vendor, item,
+             quantity, unit price and line total.
+Format:      First one line: how many match, and how many do not. Then a table
+             of the ones that do not: invoice number, vendor, PO number, the
+             line that differs, what the PO says, what the invoice says.
+Constraints: Compare vendor, items, quantities, unit prices and totals, line
+             by line. If an invoice has no PO number, or its PO is not in the
+             list, say so; do not guess one. Report only. Do not change any
+             file.
+```
+
+</details>
 
 ## Task 5. A doc for the controller (8 min)
 
@@ -128,6 +221,28 @@ Send your brief, then check with the [Task 4 answer key](https://github.com/pana
 
 **Give your manager:** a doc you can open again. **Checkpoint:** checks 12–14 passed, and you know where the doc is.
 **Theory:** 1.4 artifact persistence; 1.5 where each vendor keeps results.
+
+<details>
+<summary>📝 Sample brief (write yours first, then compare)</summary>
+
+One good brief for this task. It gives the AI the facts and limits, not the answer. Yours can differ and still pass.
+
+```text
+Outcome:     A one-page document for Brightline's controller, that I can open
+             again later: each bill due by Friday, October 2, 2026, and their
+             total.
+Context:     The Friday list you made in this conversation. The controller is
+             the person who runs Brightline's accounts. Invoice 4471 is
+             already paid.
+Format:      A document, not text in the chat. A title, and the date
+             Wednesday, September 30, 2026. A table: vendor, invoice number,
+             amount. The total under the table. One page.
+Constraints: Use only the bills on the Friday list. Do not share or send the
+             doc to anyone; I will send it myself. Tell me where the doc is
+             saved, so I can open it again.
+```
+
+</details>
 
 ## Task 6. Which surface for which job (8 min)
 
@@ -168,6 +283,17 @@ Constraints: Ask only. Do not answer for me, and do not tell me
 Check with the [Task 6 answer key](https://github.com/panaversity/agentfactory-v2-resources/releases/latest/download/brightline-lab-ch01-key-task-6.md). **Checkpoint:** check 15 passed.
 **Theory:** 1.1 the ladder; 1.5 "Which surface for which job".
 
+**Your reply** — answer all of them in one message, in this shape. The decisions are yours; the key grades them.
+
+```text
+1. Rung: ____  Surface: ____  Starts it: me / a schedule
+2. Rung: ____  Surface: ____  Starts it: me / a schedule
+3. Rung: ____  Surface: ____  Starts it: me / a schedule
+4. Rung: ____  Surface: ____  Starts it: me / a schedule
+5. Rung: ____  Surface: ____  Starts it: me / a schedule
+6. Rung: ____  Surface: ____  Starts it: me / a schedule
+```
+
 ## Task 9. Where each result lives (6 min)
 
 **Your manager asks:** "Before Monday, tell me where each of these results is kept, and whether it will still be there."
@@ -200,6 +326,16 @@ Constraints: Ask only. Do not answer for me, and do not tell me
 
 Check with the [Task 9 answer key](https://github.com/panaversity/agentfactory-v2-resources/releases/latest/download/brightline-lab-ch01-key-task-9.md). **Checkpoint:** check 18 passed.
 **Theory:** 1.4 — what survives, the machine or the record?
+
+**Your reply** — answer all of them in one message, in this shape. The decisions are yours; the key grades them.
+
+```text
+1. Place: ____  Stays or goes: ____
+2. Place: ____  Stays or goes: ____
+3. Place: ____  Stays or goes: ____
+4. (skip: Task 8 is homework)
+5. Place: ____  Stays or goes: ____
+```
 
 ## Wrap-up and homework (2 min)
 
